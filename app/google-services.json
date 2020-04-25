@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "986337751125",
+    "firebase_url": "https://medcart-9d8bb.firebaseio.com",
+    "project_id": "medcart-9d8bb",
+    "storage_bucket": "medcart-9d8bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986337751125:android:0fc6c426a0a9933d9e64dc",
+        "android_client_info": {
+          "package_name": "just.edu.cit.se.medcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986337751125-0fl7b2t3vj8ud3akd3v8slml5thfbhsa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "just.edu.cit.se.medcart",
+            "certificate_hash": "c82721a117a43592109ad29681010b58c98c0533"
+          }
+        },
+        {
+          "client_id": "986337751125-5f74ddd53ccviddqs7e2v28pn4ggtalf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDin2dec1OtC3YdTdb1xVgzKdZYhyAiykI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986337751125-5f74ddd53ccviddqs7e2v28pn4ggtalf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

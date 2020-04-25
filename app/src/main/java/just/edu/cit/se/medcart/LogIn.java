@@ -1,0 +1,94 @@
+package just.edu.cit.se.medcart;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class LogIn extends AppCompatActivity {
+
+    EditText LEmail,Lpassword;
+    ImageView loginbtn;
+    TextView LReg;
+    ProgressBar progressBar;
+    FirebaseAuth fAuth;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        LEmail=findViewById(R.id.LEmail);
+        Lpassword =findViewById(R.id.LPassword);
+        progressBar=findViewById(R.id.progressBar);
+        fAuth=FirebaseAuth.getInstance();
+        loginbtn=findViewById(R.id.loginbtn);
+        LReg=findViewById(R.id.LReg);
+
+
+        loginbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = LEmail.getText().toString().trim();
+                String password=Lpassword.getText().toString().trim();
+
+                if(TextUtils.isEmpty(email)){
+                    LEmail.setError("Email is required.");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(password))
+                {
+                    Lpassword.setError("Password is required.");
+                    return;
+                }
+
+                if(password.length()<6){
+                    Lpassword.setError("password must be >= 6 characters");
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
+
+
+                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(LogIn.this,"Looged in successfully",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),search.class));
+                        }else{
+                            Toast.makeText(LogIn.this,"Error !." + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+
+
+                        }
+                    }
+                });
+            }
+        });
+
+        LReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Regist.class));
+
+            }
+        });
+    }
+
+
+}

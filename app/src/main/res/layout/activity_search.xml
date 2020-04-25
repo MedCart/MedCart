@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/search"
+    tools:context=".search">
+
+    <EditText
+        android:id="@+id/etse"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="search"
+        android:inputType="textPersonName"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.339"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.193" />
+
+
+   
+
+    <ImageView
+        android:id="@+id/s"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@drawable/searchbut"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.871"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.183" />
+
+    <ImageView
+        android:id="@+id/addCart"
+        android:layout_width="52dp"
+        android:layout_height="46dp"
+        android:src="@drawable/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.144"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+
+    <ImageView
+        android:id="@+id/viewCart"
+        android:layout_width="63dp"
+        android:layout_height="48dp"
+        android:src="@drawable/view"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.408"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.708"
+        tools:ignore="UnknownId" />
+
+    <ImageView
+        android:id="@+id/btnMap"
+        android:layout_width="50dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/gotolocation"
+        android:text="map"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.733" />
+
+    <ImageView
+        android:id="@+id/logout"
+        android:layout_width="55dp"
+        android:layout_height="62dp"
+        android:onClick="logout"
+        android:src="@drawable/outl"
+        android:text="logout"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.122"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
+
+    <ScrollView
+        android:layout_width="318dp"
+        android:layout_height="230dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.392">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="394dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:text="name"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+
+                android:layout_width="216dp"
+                android:layout_height="73dp"
+                android:id="@+id/Ptag"
+                android:layout_below="@+id/name"
+                android:layout_marginStart="210dp"
+                android:layout_marginLeft="95dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="5dp"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:padding="10dp"
+                android:text="السعر :"
+                android:textAlignment="viewEnd"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="139dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="5dp"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:padding="10dp"
+
+                android:text="price"
+                android:textColor="#000000"
+                android:textSize="25sp" />
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:id="@+id/Utag"
+                android:layout_marginStart="170dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/Ptag"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:text="الأستخدامات:"
+                android:textAlignment="viewEnd"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/usage"
+                android:layout_width="365dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:accessibilityHeading="false"
+                android:allowUndo="false"
+                android:layout_below="@+id/Utag"
+                android:autoSizeMaxTextSize="25sp"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:text="usage"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                app:autoSizeTextType="none" />
+
+            <TextView
+
+                android:layout_width="228dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/usage"
+                android:layout_marginStart="170dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="5dp"
+                android:id="@+id/Dtag"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:padding="10dp"
+                android:text="الجرعات :"
+                android:textAlignment="viewEnd"
+                android:textColor="#000000"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+
+                android:id="@+id/dosage"
+                android:layout_width="306dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="16dp"
+                android:layout_below="@+id/Dtag"
+                android:layout_marginEnd="5dp"
+                android:background="#00FFFFFF"
+                android:backgroundTint="#00FFFFFF"
+                android:padding="10dp"
+                android:text="dosage"
+                android:textColor="#000000"
+                android:textSize="23sp" />
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
