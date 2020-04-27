@@ -86,9 +86,20 @@ public class Regist extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(Regist.this,"User Created.",Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(Regist.this,"User Created.",Toast.LENGTH_SHORT).show();
                             userID=fAuth.getCurrentUser().getUid();
-                            DocumentReference documentReference =fStore.collection("Users").document(userID);
+                            Map<String,Object> user=new HashMap<>();
+
+                            user.put("fName",fullName);
+                            user.put("email",email);
+                            user.put("phone",phone);
+                            fStore.collection("Users").document(userID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(Regist.this,"User Created.",Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                           /* DocumentReference documentReference =fStore.collection("Users").document(userID);
                             Map<String,Object> user=new HashMap<>();
 
                             user.put("fName",fullName);
@@ -99,7 +110,7 @@ public class Regist extends AppCompatActivity {
                                 public void onSuccess(Void aVoid) {
 
                                 }
-                            });
+                            });*/
                             startActivity(new Intent(getApplicationContext(),search.class));
                         }else{
                             Toast.makeText(Regist.this,"Error !." + task.getException().getMessage(),Toast.LENGTH_SHORT).show();

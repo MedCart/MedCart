@@ -158,7 +158,6 @@
                 android:background="#00FFFFFF"
                 android:backgroundTint="#00FFFFFF"
                 android:padding="10dp"
-
                 android:text="price"
                 android:textColor="#000000"
                 android:textSize="25sp" />

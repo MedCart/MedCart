@@ -122,20 +122,17 @@ public class search extends AppCompatActivity {
                     } else if (inCart()) {
                         Toast.makeText(search.this, "This Medicine is already added!", Toast.LENGTH_SHORT).show();}
                      else {
-                        DocumentReference documentReference = fStore.collection("Users").
-                                document(userID).collection("cart").document();
                         Map<String, Object> user = new HashMap<>();
-                        user.put("name", Mcart.name);
-                        user.put("price", Mcart.price);
-                        user.put("quantity", 1);
-
-                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Toast.makeText(search.this, "Medicine added.", Toast.LENGTH_SHORT).show();
-                                Clist.add(Mcart);
-                            }
-                        });
+                         user.put("name", Mcart.name);
+                         user.put("price", Mcart.price);
+                         user.put("quantity", 1);
+                         fStore.collection("Users").document(userID).collection("cart").document(Mcart.name).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                             @Override
+                             public void onSuccess(Void aVoid) {
+                                 Toast.makeText(search.this, "Medicine added.", Toast.LENGTH_SHORT).show();
+                                 Clist.add(Mcart);
+                             }
+                         });
                     }
                 }
 

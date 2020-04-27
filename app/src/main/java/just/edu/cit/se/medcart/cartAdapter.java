@@ -14,10 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +30,8 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
 
     private Context mCtx;
     private ArrayList<MCart> List;
+    private int p;
+
 
     public cartAdapter(Context mCtx, ArrayList<MCart> list) {
         this.mCtx = mCtx;
@@ -47,6 +51,7 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
         holder.name.setText(medicine.name);
         holder.price.setText(medicine.price);
         holder.quantity.setText(Integer.toString(medicine.quantity));
+        p=position;
     }
 
     @Override
@@ -78,20 +83,14 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
             Inc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id="";
-                    for (int i=0;i<Cart.MedID.size();i++)
-                    {
-                        if(Cart.MedID.get(i).Name==name.getText())
-                        {
-                            id=Cart.MedID.get(i).ID;
-                            DocumentReference documentReference =fStore.collection("Users").
-                                    document(userID).collection("cart").document(id);
-                            Map<String,Object> user=new HashMap<>();
-                            user.put("quantity",++Cart.list.get(i).quantity);
-                            documentReference.update(user);
-                            notifyDataSetChanged();
-                        }
-                    }
+                    Map<String,Object> user=new HashMap<>();
+                    int result=Integer.parseInt(quantity.getText().toString())+1 ;
+                    user.put("quantity",result);
+                    fStore.collection("Users").
+                            document(userID).collection("cart").document(name.getText().toString()).update(user);
+                    ++Cart.list.get(p).quantity;
+                    notifyDataSetChanged();
+
 
                 }
             });
@@ -100,24 +99,18 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
             dec.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id="";
-                    for (int i=0;i<Cart.MedID.size();i++)
+                    if(Integer.parseInt(quantity.getText().toString())==0)
                     {
-                        if(Cart.MedID.get(i).Name==name.getText())
-                        {
-                            id=Cart.MedID.get(i).ID;
-                            DocumentReference documentReference =fStore.collection("Users").
-                                    document(userID).collection("cart").document(id);
-                            Map<String,Object> user=new HashMap<>();
 
-                            if(Cart.list.get(i).quantity>0)
-                            user.put("quantity",--Cart.list.get(i).quantity);
-                            else
-                                user.put("quantity",0);
-                            documentReference.update(user);
-                            notifyDataSetChanged();
-                        }
                     }
+                    else{
+                    Map<String,Object> user=new HashMap<>();
+                    int result=Integer.parseInt(quantity.getText().toString())-1 ;
+                    user.put("quantity",result);
+                    fStore.collection("Users").
+                            document(userID).collection("cart").document(name.getText().toString()).update(user);
+                    --Cart.list.get(p).quantity;
+                    notifyDataSetChanged();}
                 }
             });
 
@@ -126,26 +119,16 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String id="";
-                    for (int i=0;i<Cart.MedID.size();i++)
-                    {
-                        if(Cart.MedID.get(i).Name==name.getText())
-                        {
-                            id=Cart.MedID.get(i).ID;
-                            fStore.collection("Users").document(userID).
-                                    collection("cart").document(id).delete();
-                            Cart.list.remove(i);
-                            notifyDataSetChanged();
-                            search.Clist.remove(i);
 
-                        }
+                            fStore.collection("Users").document(userID).
+                                    collection("cart").document(name.getText().toString()).delete();
+                            Cart.list.remove(p);
+                            search.Clist.remove(p);
+                            notifyDataSetChanged();
                     }
-                }
+
             });
         }
-
-
-
 
         }
 

@@ -44,18 +44,6 @@ public class Cart extends AppCompatActivity {
     public static FirebaseAuth fAuth;
     public static String userID;
     TextView name;
-    Button Inc, dec, delete;
-    String S;
-
-    DocumentReference MD;
-
-    public static class Meds{
-        public String ID;
-        public  String Name;
-        public int quantity;
-    }
-
-    public static ArrayList<Meds> MedID;
 
 
     @Override
@@ -72,7 +60,6 @@ public class Cart extends AppCompatActivity {
         fStore=FirebaseFirestore.getInstance();
         fAuth=FirebaseAuth.getInstance();
         userID=fAuth.getCurrentUser().getUid();
-        MedID=new ArrayList<>();
         name=findViewById(R.id.name);
         order=findViewById(R.id.order);
 
@@ -91,18 +78,11 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 if (!queryDocumentSnapshots.isEmpty()) {
-
                     List<DocumentSnapshot> LD = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot D : LD) {
-                        Meds M=new Meds();
-                        M.ID=D.getId();
-                        M.quantity=1;
                         MCart m = D.toObject(MCart.class);
-                        M.Name=m.name;
                         list.add(m);
-                        MedID.add(M);
                     }
-
                     CA.notifyDataSetChanged();
                 }
             }
