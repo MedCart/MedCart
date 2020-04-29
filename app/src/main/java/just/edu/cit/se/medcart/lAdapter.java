@@ -4,15 +4,20 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
     private Context mCtx;
+    private ArrayList<String> List;
 
-    public lAdapter(Context mCtx) {
+    public lAdapter(Context mCtx, ArrayList<String> list) {
         this.mCtx = mCtx;
+        List = list;
     }
 
     @NonNull
@@ -24,10 +29,8 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-
+        holder.name.setText("celine");
     }
-
-
 
     @Override
     public int getItemCount() {
@@ -35,8 +38,10 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
     }
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
         public CartViewHolder(View view) {
             super(view);
+            name = itemView.findViewById(R.id.loc);
         }
     }
 }
