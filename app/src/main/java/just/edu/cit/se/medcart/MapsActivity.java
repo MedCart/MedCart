@@ -21,6 +21,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -73,11 +74,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                        {
                            Log.d(TAG, "onComplete: found location!");
                            Location currentLocatin = (Location) task.getResult();
-                           moveCamera(new LatLng(currentLocatin.getAltitude(),currentLocatin.getLongitude()),DEFAULT_ZOOM);
+                           MarkerOptions MO=new MarkerOptions();
+                           MO.position(new LatLng(32.5455021 ,35.8656245));
+                           mMap.addMarker(MO);
+                           moveCamera(new LatLng(32.5455021 ,35.8656245),DEFAULT_ZOOM);
                        }
+
                        else{
+
                            Log.d(TAG, "onComplete: current location is null;");
                            Toast.makeText(MapsActivity.this,"unable to get current location",Toast.LENGTH_SHORT).show();
+
                        }
                    }
                 });

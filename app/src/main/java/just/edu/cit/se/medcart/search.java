@@ -46,7 +46,7 @@ public class search extends AppCompatActivity {
     public static ArrayList<MCart> Clist ;
     ImageView searchIV ,VcartIV,AddCart;
     EditText MedET ;
-    TextView name,price,dosage,usage ;
+    TextView name,price,dosage,usage ,Dtag,Utag,Ptag;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     String userID;
@@ -75,6 +75,9 @@ public class search extends AppCompatActivity {
         logut=findViewById(R.id.logout);
         usage=findViewById(R.id.usage);
         dosage=findViewById(R.id.dosage);
+        Dtag=findViewById(R.id.Dtag);
+        Ptag=findViewById(R.id.Ptag);
+        Utag=findViewById(R.id.Utag);
 
 
 
@@ -144,6 +147,7 @@ public class search extends AppCompatActivity {
 
 
 
+
        searchIV.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -183,6 +187,9 @@ public class search extends AppCompatActivity {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Medicine medicine = snapshot.getValue(Medicine.class);
                     Mcart.name=medicine.name;
+                    Dtag.setVisibility(View.VISIBLE);
+                    Ptag.setVisibility(View.VISIBLE);
+                    Utag.setVisibility(View.VISIBLE);
                     Mcart.price=medicine.price;
                     name.setText(medicine.name);
                     usage.setText(medicine.usage);
