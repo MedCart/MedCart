@@ -225,7 +225,7 @@ public class search extends AppCompatActivity {
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(search.this,MapsActivity.class);
+                Intent intent = new Intent(search.this,locations.class);
                 startActivity(intent);
             }
         }
