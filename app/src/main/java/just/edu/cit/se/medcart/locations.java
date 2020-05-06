@@ -13,7 +13,6 @@ public class locations extends AppCompatActivity {
 
     RecyclerView recyclerView;
     public static lAdapter LA;
-    public static ArrayList<String> list;
 
 
 
@@ -23,16 +22,12 @@ public class locations extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
 
-        list = new ArrayList<>();
-        LA=new lAdapter(this,list);
+        LA=new lAdapter(this,search.Plist);
         recyclerView = findViewById(R.id.locations);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(LA);
 
-
-
-        list.add("celo");
 
         LA.notifyDataSetChanged();
 

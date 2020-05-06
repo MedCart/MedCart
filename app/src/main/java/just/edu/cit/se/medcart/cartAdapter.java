@@ -30,7 +30,19 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
 
     private Context mCtx;
     private ArrayList<MCart> List;
-    private int p;
+
+    class CID{
+        String name;
+        int position;
+
+        public CID(String name, int position) {
+            this.name = name;
+            this.position = position;
+        }
+    }
+
+    private ArrayList<CID> P=new ArrayList<>();
+
 
 
     public cartAdapter(Context mCtx, ArrayList<MCart> list) {
@@ -47,11 +59,14 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
+        CID c;
         MCart medicine=Cart.list.get(position);
         holder.name.setText(medicine.name);
         holder.price.setText(medicine.price);
         holder.quantity.setText(Integer.toString(medicine.quantity));
-        p=position;
+        c=new CID(holder.name.getText().toString(),position);
+        P.add(c);
+
     }
 
     @Override
@@ -88,7 +103,14 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
                     user.put("quantity",result);
                     fStore.collection("Users").
                             document(userID).collection("cart").document(name.getText().toString()).update(user);
-                    ++Cart.list.get(p).quantity;
+                    for(int i=0;i<P.size();i++)
+                    {
+                        if(P.get(i).name==name.getText().toString())
+                        {
+                            ++Cart.list.get(P.get(i).position).quantity;
+                           break;
+                        }
+                    }
                     notifyDataSetChanged();
 
 
@@ -109,8 +131,16 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
                     user.put("quantity",result);
                     fStore.collection("Users").
                             document(userID).collection("cart").document(name.getText().toString()).update(user);
-                    --Cart.list.get(p).quantity;
-                    notifyDataSetChanged();}
+                        for(int i=0;i<P.size();i++)
+                        {
+                            if(P.get(i).name==name.getText().toString())
+                            {
+                                --Cart.list.get(P.get(i).position).quantity;
+                                break;
+                            }
+                        }
+                        notifyDataSetChanged();
+                   }
                 }
             });
 
@@ -122,9 +152,17 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
 
                             fStore.collection("Users").document(userID).
                                     collection("cart").document(name.getText().toString()).delete();
-                            Cart.list.remove(p);
-                            search.Clist.remove(p);
-                            notifyDataSetChanged();
+                    for(int i=0;i<P.size();i++)
+                    {
+                        if(P.get(i).name==name.getText().toString())
+                        {
+                            Cart.list.remove(P.get(i).position);
+                            search.Clist.remove(P.get(i).position);
+                            break;
+                        }
+                    }
+                    notifyDataSetChanged();
+
                     }
 
             });

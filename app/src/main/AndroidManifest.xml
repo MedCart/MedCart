@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".locations"></activity>
+        <activity android:name=".UserLocation"></activity>
+        <activity android:name=".locations" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -29,7 +30,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="AIzaSyAG_u7153rcX9jQSQkNcEullR4PKZRJuqQ" />
 
         <activity android:name=".order" />
         <activity android:name=".Cart" />

@@ -12,7 +12,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="379dp"
         android:layout_height="106dp"
+        android:layout_margin="5dp"
         android:background="#8600FFF7"
+        android:clickable="true"
         app:cardBackgroundColor="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +34,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginBottom="5dp"
             android:text="pharmacy"
-            android:textColor="@color/colorAccent"
+            android:textColor="@android:color/black"
             android:textSize="40sp"
             android:textStyle="bold"
             android:visibility="visible" />

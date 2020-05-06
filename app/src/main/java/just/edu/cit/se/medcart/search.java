@@ -44,6 +44,7 @@ public class search extends AppCompatActivity {
 
 
     public static ArrayList<MCart> Clist ;
+    public static ArrayList<String> Plist;
     ImageView searchIV ,VcartIV,AddCart;
     EditText MedET ;
     TextView name,price,dosage,usage ,Dtag,Utag,Ptag;
@@ -53,6 +54,7 @@ public class search extends AppCompatActivity {
     MCart Mcart;
     Cart c;
     ImageView logut;
+
 
 
 
@@ -71,21 +73,24 @@ public class search extends AppCompatActivity {
         AddCart=findViewById(R.id.addCart);
         VcartIV=findViewById(R.id.viewCart);
         MedET=findViewById(R.id.etse);
-        Clist = new ArrayList<MCart>();
+        Clist = new ArrayList<>();
+        Plist=new ArrayList<>();
         logut=findViewById(R.id.logout);
         usage=findViewById(R.id.usage);
         dosage=findViewById(R.id.dosage);
         Dtag=findViewById(R.id.Dtag);
         Ptag=findViewById(R.id.Ptag);
         Utag=findViewById(R.id.Utag);
+        Mcart =new MCart();
 
 
 
         fStore=FirebaseFirestore.getInstance();
         fAuth=FirebaseAuth.getInstance();
-        userID = fAuth.getCurrentUser().getUid();
+
 
         if(fAuth.getCurrentUser() != null) {
+            userID = fAuth.getCurrentUser().getUid();
             logut.setVisibility(View.VISIBLE);
 
         fStore.collection("Users").document(userID).collection("cart").get().
@@ -108,8 +113,14 @@ public class search extends AppCompatActivity {
         VcartIV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(fAuth.getCurrentUser() == null) {
+                    Toast.makeText(search.this,"you should be logged in to have a cart!!",Toast.LENGTH_SHORT).show();
+
+                }else
+
+                {
                 Intent secondActivity =new Intent(getApplicationContext(), Cart.class);
-                startActivity(secondActivity);
+                startActivity(secondActivity);}
 
 
             }
@@ -120,7 +131,7 @@ public class search extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(fAuth.getCurrentUser() != null) {
-                    if (Mcart.name == "") {
+                    if (Mcart.name.matches("")) {
                         Toast.makeText(search.this, "No Medicine to add!", Toast.LENGTH_SHORT).show();
                     } else if (inCart()) {
                         Toast.makeText(search.this, "This Medicine is already added!", Toast.LENGTH_SHORT).show();}
@@ -156,6 +167,12 @@ public class search extends AppCompatActivity {
                       .orderByChild("name")
                       .equalTo(MedName);
              query.addListenerForSingleValueEvent(valueEventListener);
+             Query query1=FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName).equalTo(MedName);
+             System.out.println("query");
+             query1.addValueEventListener(valueEventListener1);
+             System.out.println("after event");
+
+
          }
        });
 
@@ -182,7 +199,7 @@ public class search extends AppCompatActivity {
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            Mcart =new MCart();
+
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Medicine medicine = snapshot.getValue(Medicine.class);
@@ -210,6 +227,29 @@ public class search extends AppCompatActivity {
         }
     };
 
+    ValueEventListener valueEventListener1=new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            pharmacy p ;
+            System.out.println("p");
+            if (dataSnapshot.exists()) {
+                System.out.println("if statement");
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    System.out.println("for");
+                    String S = snapshot.getKey();
+                    Plist.add(S);
+                    System.out.println(S);
+                }
+
+
+            }else {System.out.println("not entering");}
+
+        }
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+        }
+    };
 
 
     public void map(View view) {
@@ -221,7 +261,7 @@ public class search extends AppCompatActivity {
 
 
     public void inint(){
-        @SuppressLint("WrongViewCast") ImageView btnMap=(ImageView) findViewById(R.id.btnMap);
+        @SuppressLint("WrongViewCast") ImageView btnMap= findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,6 +288,7 @@ public class search extends AppCompatActivity {
             dialog.show();
 
         }
+
         else {Toast.makeText(this,"you can't make app request",Toast.LENGTH_SHORT).show();
         }
         return false;
