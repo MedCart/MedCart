@@ -96,7 +96,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
 
     private void initMap()
     {
-        SupportMapFragment mapfragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map2);
+        SupportMapFragment mapfragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapfragment.getMapAsync(UserLocation.this);
     }
 

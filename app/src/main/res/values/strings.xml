@@ -2,4 +2,5 @@
     <string name="app_name">MedCart</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps2">Map</string>
+    <string name="google_maps_API_key">AIzaSyAG_u7153rcX9jQSQkNcEullR4PKZRJuqQ</string>
 </resources>

@@ -34,6 +34,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this,"map is ready",Toast.LENGTH_SHORT).show();
         mMap=googleMap;
 
+
         if(mLocationPermissionGranted)
         {
 
@@ -76,9 +77,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                            Log.d(TAG, "onComplete: found location!");
                            Location currentLocation = (Location) task.getResult();
                            MarkerOptions MO=new MarkerOptions();
-                           MO.position(new LatLng(32.5455021 ,35.8656245));
+                           MO.position(lAdapter.location);
                            mMap.addMarker(MO);
-                           moveCamera(new LatLng(32.5455021 ,35.8656245),DEFAULT_ZOOM);
+                           moveCamera(lAdapter.location,DEFAULT_ZOOM);
                        }
 
                        else{

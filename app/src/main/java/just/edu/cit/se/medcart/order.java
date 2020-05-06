@@ -57,7 +57,7 @@ public class order extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(order.this, UserLocation.class);
+                Intent intent = new Intent(order.this, MapsActivity.class);
                 startActivity(intent);
             }
         });
