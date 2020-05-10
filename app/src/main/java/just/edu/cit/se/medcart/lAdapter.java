@@ -38,7 +38,8 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
             this.position = position;
         }
     }
-    LID l;
+    ArrayList <LID> l=new ArrayList<>();
+    int pos;
 
     public lAdapter(Context mCtx, ArrayList<String> list) {
         this.mCtx = mCtx;
@@ -54,7 +55,8 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-         l=new LID(List.get(position),position);
+        LID l2=new LID(List.get(position),position);
+        l.add(l2);
         holder.name.setText(List.get(position));
     }
 
@@ -86,8 +88,7 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if (dataSnapshot.exists()) {
                                                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                                   ltd=snapshot.getValue().toString();
-                                                   // ltd="32.5589444,35.8633333";
+                                                    ltd=snapshot.getValue().toString();
                                                     System.out.println(ltd);
                                                     String[] latlong =  ltd.split(",");
                                                     latitude = Double.parseDouble(latlong[0]);
@@ -109,7 +110,6 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
                                     System.out.println(soso);
                                     q.addValueEventListener(V);
 
-                                    //ltd="32.5589444,35.8633333";
 
 
                                 }
@@ -122,11 +122,15 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
                         }
                     };
 
+                    for(int i=0;i<l.size();i++){
+                        if(l.get(i).name==name.getText().toString())
+                        {pos=i;
+                        break;
+                        }}
                     Query query = FirebaseDatabase.getInstance().getReference("Users")
                             .orderByChild("Pharmacy")
-                            .equalTo(l.name);
+                            .equalTo(l.get(pos).name);
                     query.addValueEventListener(E);
-
 
 
                     Intent intent = new Intent(mCtx,MapsActivity.class);
