@@ -50,6 +50,8 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private static final float DEFAULT_ZOOM=15f;
+    public static LatLng UL ;
+    private Double lat,lng;
 
 
     @Override
@@ -75,6 +77,9 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
                             Log.d(TAG, "onComplete: found location!");
                             Location currentLocation = (Location) task.getResult();
                             moveCamera(new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude()),DEFAULT_ZOOM);
+                            lat=currentLocation.getLatitude();
+                            lng=currentLocation.getLongitude();
+                            UL=new LatLng(lat,lng);
                         }
                         else{
                             Log.d(TAG, "onComplete: current location is null;");
@@ -96,7 +101,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
 
     private void initMap()
     {
-        SupportMapFragment mapfragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapfragment=(SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map2);
         mapfragment.getMapAsync(UserLocation.this);
     }
 

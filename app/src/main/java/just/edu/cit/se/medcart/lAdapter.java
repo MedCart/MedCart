@@ -104,10 +104,13 @@ public class lAdapter extends RecyclerView.Adapter<lAdapter.CartViewHolder>{
                                         }
                                     };
 
-                                    String soso = snapshot.getKey();
+                                    String ID = snapshot.getKey();
 
-                                    Query q=FirebaseDatabase.getInstance().getReference("Users").child(soso).limitToLast(1);
-                                    System.out.println(soso);
+
+
+
+                                    Query q=FirebaseDatabase.getInstance().getReference("Users").child(ID).limitToLast(1);
+                                    System.out.println(ID);
                                     q.addValueEventListener(V);
 
 

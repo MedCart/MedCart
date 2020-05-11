@@ -13,16 +13,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class order extends AppCompatActivity {
 
 
     ImageView location,confirm;
     EditText number;
+    FirebaseFirestore fStore;
+    FirebaseAuth fAuth;
+    String userID;
     private static final String TAG = "MainActivity";
 
     private static final int ERROR_DIALOG_REQUEST = 9001;
@@ -35,6 +43,9 @@ public class order extends AppCompatActivity {
         location=findViewById(R.id.location);
         confirm=findViewById(R.id.confrim);
         number=findViewById(R.id.Onumber);
+        fStore=FirebaseFirestore.getInstance();
+        fAuth=FirebaseAuth.getInstance();
+        userID = fAuth.getCurrentUser().getUid();
 
 
 
@@ -45,8 +56,18 @@ public class order extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Toast.makeText(order.this,"your order is confirmed we will contact you",Toast.LENGTH_LONG).show();
-               finish();
+                Map<String, Object> user = new HashMap<>();
+                user.put("Location",UserLocation.UL);
+                user.put("Number",number.getText().toString());
+                user.put("Medicines","All the Cart");
+                fStore.collection("Users").document(userID).collection("order").document("information").set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(order.this,"your order is confirmed we will contact you",Toast.LENGTH_LONG).show();
+                        finish();
+
+                    }
+                });
 
 
             }
@@ -57,7 +78,7 @@ public class order extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(order.this, MapsActivity.class);
+                Intent intent = new Intent(order.this, UserLocation.class);
                 startActivity(intent);
             }
         });
