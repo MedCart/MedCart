@@ -81,7 +81,7 @@ public class search extends AppCompatActivity {
         Dtag=findViewById(R.id.Dtag);
         Ptag=findViewById(R.id.Ptag);
         Utag=findViewById(R.id.Utag);
-        Mcart =new MCart();
+
 
 
 
@@ -188,7 +188,8 @@ public class search extends AppCompatActivity {
     {
         for(int i=0;i<Clist.size();i++)
         {
-            if(Clist.get(i).name.equals(name.getText().toString()) )
+            System.out.println(Clist.get(i).name);
+            if(Clist.get(i).name.equals(String.valueOf(MedET.getText())))
             {
                 return true;
             }
@@ -203,6 +204,7 @@ public class search extends AppCompatActivity {
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Medicine medicine = snapshot.getValue(Medicine.class);
+                    Mcart =new MCart();
                     Mcart.name=medicine.name;
                     Dtag.setVisibility(View.VISIBLE);
                     Ptag.setVisibility(View.VISIBLE);
@@ -230,7 +232,6 @@ public class search extends AppCompatActivity {
     ValueEventListener valueEventListener1=new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-            pharmacy p ;
             System.out.println("p");
             if (dataSnapshot.exists()) {
                 System.out.println("if statement");
