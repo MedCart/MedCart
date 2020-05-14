@@ -152,12 +152,11 @@ public class search extends AppCompatActivity {
          @Override
          public void onClick(View v) {// on click function
              try { //try statement
-                 if(String.valueOf(MedET.getText())==""){
-                     Toast.makeText(search.this,"no medicine to search for",Toast.LENGTH_SHORT).show();
-                 }
-                     else{
                      String MedName = String.valueOf(MedET.getText());
-                     //Toast.makeText(search.this, "no medicine to search for", Toast.LENGTH_SHORT).show();
+                     if(MedName.matches("")){
+                         Toast.makeText(search.this,"no medicine to search for",Toast.LENGTH_SHORT).show();
+                         return;
+                     }//end if
 
                      Query query = FirebaseDatabase.getInstance().getReference("database").child("0").child("data")
                              .orderByChild("name")
@@ -165,12 +164,12 @@ public class search extends AppCompatActivity {
                      query.addListenerForSingleValueEvent(valueEventListener);
                      Query query1 = FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName).equalTo(MedName);
                      query1.addValueEventListener(valueEventListener1);
-                 }
 
-             } //end of try statement
+
+                } //end of try statement
 
              catch (Exception e) { //catch statement
-                 Toast.makeText(search.this,e.toString(),Toast.LENGTH_SHORT).show();
+
              }//end of catch statement
 
          }//end of onclick function
