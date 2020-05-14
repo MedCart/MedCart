@@ -90,7 +90,6 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
         }catch(SecurityException e){}
     }//end of getdevicelocation
 
-
     private void moveCamera(LatLng latLng,float zoom)
     {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
@@ -117,11 +116,11 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
                 ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
             }
 
-        }else
+        }
+        else
         {
             ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
         }
-
     }
 
     @Override

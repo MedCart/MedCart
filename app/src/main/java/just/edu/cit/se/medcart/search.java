@@ -115,7 +115,7 @@ public class search extends AppCompatActivity {
             public void onClick(View v) { //on click function
                 try{  // try statement
                 if(fAuth.getCurrentUser() != null) { //outer if
-                    if (Mcart.name.matches("")) { //inner if
+                    if ( Mcart==null || Mcart.name.matches("")) { //inner if
                         Toast.makeText(search.this, "No Medicine to add!", Toast.LENGTH_SHORT).show();
                     }//end of inner if
                     else if (inCart()) { //inner else if
@@ -152,16 +152,20 @@ public class search extends AppCompatActivity {
          @Override
          public void onClick(View v) {// on click function
              try { //try statement
-                 String MedName = String.valueOf(MedET.getText());
-                 Query query = FirebaseDatabase.getInstance().getReference("database").child("0").child("data")
-                         .orderByChild("name")
-                         .equalTo(MedName);
-                 query.addListenerForSingleValueEvent(valueEventListener);
-                 Query query1 = FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName).equalTo(MedName);
-                 System.out.println("query");
-                 query1.addValueEventListener(valueEventListener1);
-                 System.out.println("after event");
+                 if(String.valueOf(MedET.getText())==""){
+                     Toast.makeText(search.this,"no medicine to search for",Toast.LENGTH_SHORT).show();
+                 }
+                     else{
+                     String MedName = String.valueOf(MedET.getText());
+                     //Toast.makeText(search.this, "no medicine to search for", Toast.LENGTH_SHORT).show();
 
+                     Query query = FirebaseDatabase.getInstance().getReference("database").child("0").child("data")
+                             .orderByChild("name")
+                             .equalTo(MedName);
+                     query.addListenerForSingleValueEvent(valueEventListener);
+                     Query query1 = FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName).equalTo(MedName);
+                     query1.addValueEventListener(valueEventListener1);
+                 }
 
              } //end of try statement
 
@@ -239,10 +243,8 @@ public class search extends AppCompatActivity {
                         String S = snapshot.getKey();
                         Plist.add(S); // to add the pharmacies to list
                     }//end of for loop
-
                 }//end of if statement
                 else {
-                    System.out.println("not entering");
                 }// end of else
             }//end of try statement
             catch (Exception e){
