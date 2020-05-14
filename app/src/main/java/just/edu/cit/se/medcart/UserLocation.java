@@ -6,17 +6,13 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -28,7 +24,18 @@ import com.google.android.gms.tasks.Task;
 
 
 public class UserLocation extends FragmentActivity implements OnMapReadyCallback {
-
+    //attributes declaration
+    private static final  String TAG ="UserLocation";
+    private static final  String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
+    private static final  String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
+    private boolean mLocationPermissionGranted=false;
+    private static final  int LOCATION_PERMISSION_REQUEST_CODE =1234;
+    private GoogleMap mMap;
+    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private static final float DEFAULT_ZOOM=15f;
+    public static LatLng UL ;
+    private Double lat,lng;
+    //end of declaration
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -42,16 +49,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private static final  String TAG ="UserLocation";
-    private static final  String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
-    private static final  String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
-    private boolean mLocationPermissionGranted=false;
-    private static final  int LOCATION_PERMISSION_REQUEST_CODE =1234;
-    private GoogleMap mMap;
-    private FusedLocationProviderClient mFusedLocationProviderClient;
-    private static final float DEFAULT_ZOOM=15f;
-    public static LatLng UL ;
-    private Double lat,lng;
+
 
 
     @Override
