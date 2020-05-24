@@ -1,10 +1,13 @@
 package just.edu.cit.se.medcart;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +34,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
     private boolean mLocationPermissionGranted=false;
     private static final  int LOCATION_PERMISSION_REQUEST_CODE =1234;
     private GoogleMap mMap;
+    private Button location;
     private FusedLocationProviderClient mFusedLocationProviderClient;
     private static final float DEFAULT_ZOOM=15f;
     public static LatLng UL ;
@@ -56,8 +60,17 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_location);
+        location=findViewById(R.id.confirmL);
 
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent secondActivity =new Intent(getApplicationContext(),order.class);
+                startActivity(secondActivity);
+            }
+        });
         getLocationPermission();
+
     }
 
 
@@ -90,6 +103,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
         }catch(SecurityException e){}
     }//end of getdevicelocation
 
+
     private void moveCamera(LatLng latLng,float zoom)
     {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom));
@@ -116,11 +130,11 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
                 ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
             }
 
-        }
-        else
+        }else
         {
             ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
         }
+
     }
 
     @Override
@@ -146,4 +160,4 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
             }
         }
     }
-}//end of class
+}//end

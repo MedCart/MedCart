@@ -32,14 +32,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAG_u7153rcX9jQSQkNcEullR4PKZRJuqQ" />
 
-        <activity android:name=".order" />
+        <activity android:name=".order"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Cart" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".search" />
+        <activity android:name=".search"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Regist" />
         <activity android:name=".LogIn" />
         <activity android:name=".MainActivity">

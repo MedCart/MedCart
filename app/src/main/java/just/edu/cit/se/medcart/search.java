@@ -160,9 +160,9 @@ public class search extends AppCompatActivity {
 
                      Query query = FirebaseDatabase.getInstance().getReference("database").child("0").child("data")
                              .orderByChild("name")
-                             .equalTo(MedName);
+                             .equalTo(MedName.toLowerCase());
                      query.addListenerForSingleValueEvent(valueEventListener);
-                     Query query1 = FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName).equalTo(MedName);
+                     Query query1 = FirebaseDatabase.getInstance().getReference("Pharmacies").orderByChild(MedName.toLowerCase()).equalTo(MedName.toLowerCase());
                      query1.addValueEventListener(valueEventListener1);
 
 
@@ -189,7 +189,7 @@ public class search extends AppCompatActivity {
         for(int i=0;i<Clist.size();i++)
         { //for to loop all over the cart list
             System.out.println(Clist.get(i).name);
-            if(Clist.get(i).name.equals(String.valueOf(MedET.getText())))
+            if(Clist.get(i).name.equals(String.valueOf(MedET.getText()).toLowerCase()))
             { // if statement to check for matching medicine name
                 return true;
             }// end of if statement
@@ -240,6 +240,9 @@ public class search extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) { // to loop over the records
                         String S = snapshot.getKey();
+                        if(Plist.contains(S))
+                            continue;
+                        else
                         Plist.add(S); // to add the pharmacies to list
                     }//end of for loop
                 }//end of if statement

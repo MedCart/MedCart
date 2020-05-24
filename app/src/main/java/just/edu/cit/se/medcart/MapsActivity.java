@@ -69,25 +69,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if(mLocationPermissionGranted){
                 final Task location = mFusedLocationProviderClient.getLastLocation();
                 location.addOnCompleteListener(new OnCompleteListener() {
-                   @Override
-                   public void onComplete(@NonNull Task task) {
-                       if(task.isSuccessful())
-                       {
-                           Log.d(TAG, "onComplete: found location!");
-                           Location currentLocation = (Location) task.getResult();
-                           MarkerOptions MO=new MarkerOptions();
-                           MO.position(locationsAdapter.location);
-                           mMap.addMarker(MO);
-                           moveCamera(locationsAdapter.location,DEFAULT_ZOOM);
-                       }//end inner if
+                    @Override
+                    public void onComplete(@NonNull Task task) {
+                        if(task.isSuccessful())
+                        {
+                            Log.d(TAG, "onComplete: found location!");
+                            Location currentLocation = (Location) task.getResult();
+                            MarkerOptions MO=new MarkerOptions();
+                            MO.position(locationsAdapter.location);
+                            mMap.addMarker(MO);
+                            moveCamera(locationsAdapter.location,DEFAULT_ZOOM);
+                        }//end inner if
 
-                       else{
-                           Log.d(TAG, "onComplete: current location is null;");
-                           Toast.makeText(MapsActivity.this,"unable to get current location",Toast.LENGTH_SHORT).show();
-                       }//end else
-                   }
+                        else{
+                            Log.d(TAG, "onComplete: current location is null;");
+                            Toast.makeText(MapsActivity.this,"unable to get current location",Toast.LENGTH_SHORT).show();
+                        }//end else
+                    }
                 });//end of completeListener
-             }//end if
+            }//end if
 
         }//end of try statement
         catch(SecurityException e){
@@ -124,9 +124,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         }//outer if end
         else
-            {
+        {
             ActivityCompat.requestPermissions(this,permissions,LOCATION_PERMISSION_REQUEST_CODE);
-            }//outer else end
+        }//outer else end
     }//end of getLocationPermission
 
     @Override
@@ -155,4 +155,3 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }//end of onRe... function
 }//end of class
-
