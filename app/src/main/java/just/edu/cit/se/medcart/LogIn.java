@@ -88,7 +88,7 @@ public class LogIn extends AppCompatActivity {
         LReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Regist.class));
+                startActivity(new Intent(getApplicationContext(), Register.class));
             }//end of onClick function
 
         });//end of LReg button

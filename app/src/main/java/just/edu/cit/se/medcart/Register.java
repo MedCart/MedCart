@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -20,13 +18,12 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Regist extends AppCompatActivity {
+public class Register extends AppCompatActivity {
 //declare attribute
     EditText Rname,REmail,Rpassword,Rphone;
     ImageView Registerbtn;
@@ -95,13 +92,13 @@ public class Regist extends AppCompatActivity {
                                 fStore.collection("Users").document(userID).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        Toast.makeText(Regist.this, "User Created.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(Register.this, "User Created.", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                                 startActivity(new Intent(getApplicationContext(), search.class));
                             }//end if isSuccessful
                             else {
-                                Toast.makeText(Regist.this, "Error !." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Register.this, "Error !." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
 
                             }//end else

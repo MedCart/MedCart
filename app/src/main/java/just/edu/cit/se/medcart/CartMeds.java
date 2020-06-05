@@ -1,15 +1,15 @@
 package just.edu.cit.se.medcart;
 
-public class MCart {
+public class CartMeds {
     public String name="";
     public String price="";
     public int quantity=1;
 
 
-    public MCart() {
+    public CartMeds() {
     }
 
-    public MCart(String name, String price, int quantity) {
+    public CartMeds(String name, String price, int quantity) {
         this.name = name;
         this.price = price;
         this.quantity = quantity;

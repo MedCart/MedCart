@@ -36,7 +36,7 @@ public class search extends AppCompatActivity {
 //attribute declaration
     private static final String TAG = "SearchActivity";
     private static final int ERROR_DIALOG_REQUEST = 9001;
-    public static ArrayList<MCart> Clist ;
+    public static ArrayList<CartMeds> Clist ;
     public static ArrayList<String> Plist;
     ImageView searchIV ,VcartIV,AddCart;
     EditText MedET ;
@@ -44,7 +44,7 @@ public class search extends AppCompatActivity {
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     String userID;
-    MCart Mcart;
+    CartMeds mcart;
     Cart c;
     ImageView logut;
 //end of attributes declaration
@@ -86,7 +86,7 @@ public class search extends AppCompatActivity {
                         if (!queryDocumentSnapshots.isEmpty()) {
                             List<DocumentSnapshot> LD = queryDocumentSnapshots.getDocuments();
                             for (DocumentSnapshot D : LD) { //to loop over the records and add them to cart list
-                                MCart m=D.toObject(MCart.class);
+                                CartMeds m=D.toObject(CartMeds.class);
                                 Clist.add(m);
                             }//end of for
                         }//end inner if
@@ -115,21 +115,21 @@ public class search extends AppCompatActivity {
             public void onClick(View v) { //on click function
                 try{  // try statement
                 if(fAuth.getCurrentUser() != null) { //outer if
-                    if ( Mcart==null || Mcart.name.matches("")) { //inner if
+                    if ( mcart ==null || mcart.name.matches("")) { //inner if
                         Toast.makeText(search.this, "No Medicine to add!", Toast.LENGTH_SHORT).show();
                     }//end of inner if
                     else if (inCart()) { //inner else if
                         Toast.makeText(search.this, "This Medicine is already added!", Toast.LENGTH_SHORT).show();}//end of else if
                      else {//inner else
                         Map<String, Object> user = new HashMap<>();
-                         user.put("name", Mcart.name);
-                         user.put("price", Mcart.price);
+                         user.put("name", mcart.name);
+                         user.put("price", mcart.price);
                          user.put("quantity", 1);
-                         fStore.collection("Users").document(userID).collection("cart").document(Mcart.name).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                         fStore.collection("Users").document(userID).collection("cart").document(mcart.name).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                              @Override
                              public void onSuccess(Void aVoid) {
                                  Toast.makeText(search.this, "Medicine added.", Toast.LENGTH_SHORT).show();
-                                 Clist.add(Mcart);
+                                 Clist.add(mcart);
                              }
                          });
                     }//end of inner else
@@ -203,13 +203,13 @@ public class search extends AppCompatActivity {
             try {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) { //for to loop over the record from firebase
-                        Medicine medicine = snapshot.getValue(Medicine.class);
-                        Mcart = new MCart();
-                        Mcart.name = medicine.name;
+                        MedicineInfo medicine = snapshot.getValue(MedicineInfo.class);
+                        mcart = new CartMeds();
+                        mcart.name = medicine.name;
                         Dtag.setVisibility(View.VISIBLE);
                         Ptag.setVisibility(View.VISIBLE);
                         Utag.setVisibility(View.VISIBLE);
-                        Mcart.price = medicine.price;
+                        mcart.price = medicine.price;
                         name.setText(medicine.name);
                         usage.setText(medicine.usage);
                         dosage.setText(medicine.getDosage());

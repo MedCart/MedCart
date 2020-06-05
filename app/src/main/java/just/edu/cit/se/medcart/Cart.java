@@ -20,7 +20,7 @@ import java.util.List;
 public class Cart extends AppCompatActivity {
 
     //attribute declaration
-    public static ArrayList<MCart> list;
+    public static ArrayList<CartMeds> list;
     RecyclerView recyclerView;
     ImageView order;
     public static cartAdapter CA;
@@ -54,7 +54,7 @@ public class Cart extends AppCompatActivity {
         order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent secondActivity =new Intent(getApplicationContext(), order.class);
+                Intent secondActivity =new Intent(getApplicationContext(), orderInfo.class);
                 startActivity(secondActivity);
             }
         });//end of order button click
@@ -67,7 +67,7 @@ public class Cart extends AppCompatActivity {
                 if (!queryDocumentSnapshots.isEmpty()) {//to make sure that there are snapshots
                     List<DocumentSnapshot> LD = queryDocumentSnapshots.getDocuments();
                     for (DocumentSnapshot D : LD) {//to loop all over the records and add them to the list
-                        MCart m = D.toObject(MCart.class);
+                        CartMeds m = D.toObject(CartMeds.class);
                         list.add(m);
                     }//end of for loop
                     CA.notifyDataSetChanged();

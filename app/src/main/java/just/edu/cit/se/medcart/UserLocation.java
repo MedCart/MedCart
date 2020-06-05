@@ -65,7 +65,7 @@ public class UserLocation extends FragmentActivity implements OnMapReadyCallback
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent secondActivity =new Intent(getApplicationContext(),order.class);
+                Intent secondActivity =new Intent(getApplicationContext(), orderInfo.class);
                 startActivity(secondActivity);
             }
         });

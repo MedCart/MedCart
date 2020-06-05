@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void re(View view) {
-        Intent  secondActivity =new Intent(getApplicationContext(),Regist.class);
+        Intent  secondActivity =new Intent(getApplicationContext(), Register.class);
         startActivity(secondActivity);
     }
 

@@ -32,7 +32,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAG_u7153rcX9jQSQkNcEullR4PKZRJuqQ" />
 
-        <activity android:name=".order"
+        <activity android:name=".orderInfo"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".Cart" />
 
@@ -42,7 +42,7 @@
 
         <activity android:name=".search"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".Regist" />
+        <activity android:name=".Register" />
         <activity android:name=".LogIn" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-public class order extends AppCompatActivity {
+public class orderInfo extends AppCompatActivity {
     //declare attributes
     ImageView location,confirm;
     EditText number;
@@ -61,7 +61,7 @@ public class order extends AppCompatActivity {
                             addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(order.this, "your order is confirmed we will contact you", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(orderInfo.this, "your order is confirmed we will contact you", Toast.LENGTH_LONG).show();
                                     finish();
 
                                 }
@@ -78,7 +78,7 @@ public class order extends AppCompatActivity {
         location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(order.this, UserLocation.class);
+                Intent intent = new Intent(orderInfo.this, UserLocation.class);
                 startActivity(intent);
             }
         });//end of location button
@@ -87,7 +87,7 @@ public class order extends AppCompatActivity {
     public boolean isServicesOK(){
         Log.d(TAG, "isServicesOK: checking google services version");
         try {
-            int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(order.this);
+            int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(orderInfo.this);
 
             if (available == ConnectionResult.SUCCESS) {
                 //everything is fine and the user can make map requests
@@ -96,7 +96,7 @@ public class order extends AppCompatActivity {
             } else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
                 //an error occured but we can resolve it
                 Log.d(TAG, "isServicesOK: an error occured but we can fix it");
-                Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(order.this, available, ERROR_DIALOG_REQUEST);
+                Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(orderInfo.this, available, ERROR_DIALOG_REQUEST);
                 dialog.show();
             } else {
                 Toast.makeText(this, "You can't make map requests", Toast.LENGTH_SHORT).show();

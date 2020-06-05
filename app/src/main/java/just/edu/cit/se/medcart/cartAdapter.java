@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,7 +21,7 @@ import java.util.Map;
 public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder> {
 //attributes declaration
     private Context mCtx;
-    private ArrayList<MCart> List;
+    private ArrayList<CartMeds> List;
 
     //inner claas to hold the position of the card
     class CID{
@@ -39,7 +38,7 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
 //end of declaration
 
 
-    public cartAdapter(Context mCtx, ArrayList<MCart> list) { // class constructor
+    public cartAdapter(Context mCtx, ArrayList<CartMeds> list) { // class constructor
         this.mCtx = mCtx;
         List = list;
     } // end of constructor
@@ -54,7 +53,7 @@ public class cartAdapter extends RecyclerView.Adapter<cartAdapter.CartViewHolder
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
         CID c;
-        MCart medicine=Cart.list.get(position);
+        CartMeds medicine=Cart.list.get(position);
         holder.name.setText(medicine.name);
         holder.price.setText(medicine.price);
         holder.quantity.setText(Integer.toString(medicine.quantity));
