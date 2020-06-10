@@ -2,18 +2,26 @@ package just.edu.cit.se.medcart;
 
 import android.app.Activity;
 import android.app.Instrumentation;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.core.widget.TextViewCompat;
+import androidx.test.espresso.ViewAssertion;
 import androidx.test.rule.ActivityTestRule;
 
+import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+import org.w3c.dom.Text;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
+import static java.util.regex.Pattern.matches;
 import static org.junit.Assert.*;
 
 public class searchTest {
@@ -37,25 +45,25 @@ public class searchTest {
     }
 
 
-    @Test
-    public void onCreate() {
-    }
 
     @Test
     public void inCart() {
+         assertNotNull(sActivity.findViewById(R.id.addCart));
+         CartMeds CM=new CartMeds();
+         CM.name="concor";
+         CM.price="1.2JD";
+         CM.quantity=1;
+         sActivity.Clist.add(CM);
+
+         sActivity.MedET.setText("concor");
+         assertEquals(sActivity.inCart(),true);
+
+         sActivity.MedET.setText("lanzotec");
+         assertEquals(sActivity.inCart(),false);
+
     }
 
-    @Test
-    public void map() {
-    }
 
-    @Test
-    public void inint() {
-    }
-
-    @Test
-    public void isServiceOK() {
-    }
 
     @Test
     public void locations(){
@@ -86,5 +94,44 @@ public class searchTest {
         Activity logout=getInstrumentation().waitForMonitor(monitor);
         assertNotNull(logout);
         logout.finish();
+    }
+
+    @Test
+    public void search()
+    {
+        assertNotNull(sActivity.findViewById(R.id.s));
+        sActivity.MedET.setText("concor");
+         onView(withId(R.id.s)).perform(click());
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        assertEquals(sActivity.MedET.getText().toString(),sActivity.name.getText().toString());
+
+    }
+
+    @Test
+    public void addToCart(){
+         assertNotNull(sActivity.findViewById(R.id.addCart));
+         CartMeds CM=new CartMeds();
+         CM.name="concor";
+         CM.price="1.2JD";
+         CM.quantity=1;
+         sActivity.Clist.add(CM);
+
+         sActivity.MedET.setText("concor");
+         onView(withId(R.id.s)).perform(click());
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int Size=sActivity.Clist.size();
+        onView(withId(R.id.addCart)).perform(click());
+
+         assertEquals(Size,sActivity.Clist.size());
+
     }
 }

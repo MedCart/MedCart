@@ -62,7 +62,8 @@ public class orderInfo extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(orderInfo.this, "your order is confirmed we will contact you", Toast.LENGTH_LONG).show();
-                                    finish();
+                                    Intent intent = new Intent(orderInfo.this, search.class);
+                                    startActivity(intent);
 
                                 }
                             });//end of success listener
