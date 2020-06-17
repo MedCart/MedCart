@@ -1,6 +1,5 @@
 package just.edu.cit.se.medcart;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -256,19 +255,6 @@ public class search extends AppCompatActivity {
         }
     }; // end of valueEventListener1
 
-
-
-    public void inint(){ // a function that will initiate the map
-        @SuppressLint("WrongViewCast") ImageView btnMap= findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(search.this,locations.class);
-                startActivity(intent);
-            } //end of onClick function
-        }// end of on click listener
-        ); // end of set on click listener
-    } // end of inint function
 
 
 
