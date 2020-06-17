@@ -2,8 +2,11 @@ package just.edu.cit.se.medcart;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.view.View;
 
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
 import org.junit.After;
@@ -11,11 +14,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class MainActivityTest {
 
@@ -23,9 +22,9 @@ public class MainActivityTest {
     public ActivityTestRule<MainActivity> mActivityTestRule=new ActivityTestRule<MainActivity>(MainActivity.class);
     private MainActivity mActivity=null;
 
-    Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(LogIn.class.getName(),null,false);
-    Instrumentation.ActivityMonitor monitor2=getInstrumentation().addMonitor(Register.class.getName(),null,false);
-    Instrumentation.ActivityMonitor monitor3=getInstrumentation().addMonitor(search.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor= InstrumentationRegistry.getInstrumentation().addMonitor(LogIn.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor2= InstrumentationRegistry.getInstrumentation().addMonitor(Register.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor3= InstrumentationRegistry.getInstrumentation().addMonitor(search.class.getName(),null,false);
 
 
     @Before
@@ -42,9 +41,9 @@ public class MainActivityTest {
     @Test
     public void register() {
         assertNotNull(mActivity.findViewById(R.id.regist));
-        onView(withId(R.id.regist)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.regist)).perform(ViewActions.click());
 
-        Activity Register=getInstrumentation().waitForMonitor(monitor2);
+        Activity Register= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor2);
         assertNotNull(Register);
         Register.finish();
     }
@@ -52,9 +51,9 @@ public class MainActivityTest {
     @Test
     public void login() {
         assertNotNull(mActivity.findViewById(R.id.log));
-        onView(withId(R.id.log)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.log)).perform(ViewActions.click());
 
-        Activity login=getInstrumentation().waitForMonitor(monitor);
+        Activity login= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor);
         assertNotNull(login);
         login.finish();
     }
@@ -62,9 +61,9 @@ public class MainActivityTest {
     @Test
     public void skip() {
         assertNotNull(mActivity.findViewById(R.id.skip));
-        onView(withId(R.id.skip)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.skip)).perform(ViewActions.click());
 
-        Activity skip=getInstrumentation().waitForMonitor(monitor3);
+        Activity skip= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor3);
         assertNotNull(skip);
         skip.finish();
     }

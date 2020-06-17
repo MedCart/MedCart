@@ -2,36 +2,29 @@ package just.edu.cit.se.medcart;
 
 import android.app.Activity;
 import android.app.Instrumentation;
-import android.view.View;
-import android.widget.TextView;
 
-import androidx.core.widget.TextViewCompat;
-import androidx.test.espresso.ViewAssertion;
+import androidx.test.espresso.Espresso;
+import androidx.test.espresso.action.ViewActions;
+import androidx.test.espresso.matcher.ViewMatchers;
+import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import org.w3c.dom.Text;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-import static androidx.test.platform.app.InstrumentationRegistry.getInstrumentation;
-import static java.util.regex.Pattern.matches;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class searchTest {
 
     @Rule
     public ActivityTestRule<search> sActivityTestRule=new ActivityTestRule<search>(search.class);
     private search sActivity=null;
-    Instrumentation.ActivityMonitor monitor=getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
-    Instrumentation.ActivityMonitor monitor1=getInstrumentation().addMonitor(Cart.class.getName(),null,false);
-    Instrumentation.ActivityMonitor monitor2=getInstrumentation().addMonitor(locations.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor= InstrumentationRegistry.getInstrumentation().addMonitor(MainActivity.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor1= InstrumentationRegistry.getInstrumentation().addMonitor(Cart.class.getName(),null,false);
+    Instrumentation.ActivityMonitor monitor2= InstrumentationRegistry.getInstrumentation().addMonitor(locations.class.getName(),null,false);
 
 
     @Before
@@ -68,9 +61,9 @@ public class searchTest {
     @Test
     public void locations(){
         assertNotNull(sActivity.findViewById(R.id.btnMap));
-        onView(withId(R.id.btnMap)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.btnMap)).perform(ViewActions.click());
 
-        Activity locations=getInstrumentation().waitForMonitor(monitor2);
+        Activity locations= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor2);
         assertNotNull(locations);
         locations.finish();
     }
@@ -79,9 +72,9 @@ public class searchTest {
     @Test
     public void cartView(){
         assertNotNull(sActivity.findViewById(R.id.viewCart));
-        onView(withId(R.id.viewCart)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.viewCart)).perform(ViewActions.click());
 
-        Activity viewCart=getInstrumentation().waitForMonitor(monitor1);
+        Activity viewCart= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor1);
         assertNotNull(viewCart);
         viewCart.finish();
     }
@@ -89,9 +82,9 @@ public class searchTest {
     @Test
     public void logout() {
         assertNotNull(sActivity.findViewById(R.id.logout));
-        onView(withId(R.id.logout)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.logout)).perform(ViewActions.click());
 
-        Activity logout=getInstrumentation().waitForMonitor(monitor);
+        Activity logout= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor);
         assertNotNull(logout);
         logout.finish();
     }
@@ -101,7 +94,7 @@ public class searchTest {
     {
         assertNotNull(sActivity.findViewById(R.id.s));
         sActivity.MedET.setText("concor");
-         onView(withId(R.id.s)).perform(click());
+         Espresso.onView(ViewMatchers.withId(R.id.s)).perform(ViewActions.click());
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -122,14 +115,14 @@ public class searchTest {
          sActivity.Clist.add(CM);
 
          sActivity.MedET.setText("concor");
-         onView(withId(R.id.s)).perform(click());
+         Espresso.onView(ViewMatchers.withId(R.id.s)).perform(ViewActions.click());
         try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         int Size=sActivity.Clist.size();
-        onView(withId(R.id.addCart)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.addCart)).perform(ViewActions.click());
 
          assertEquals(Size,sActivity.Clist.size());
 
