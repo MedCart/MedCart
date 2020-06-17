@@ -38,7 +38,6 @@ public class orderInfoTest {
     public void location(){
         assertNotNull(oActivity.findViewById(R.id.location));
         Espresso.onView(ViewMatchers.withId(R.id.location)).perform(ViewActions.click());
-
         Activity location= InstrumentationRegistry.getInstrumentation().waitForMonitor(monitor);
         assertNotNull(location);
         location.finish();

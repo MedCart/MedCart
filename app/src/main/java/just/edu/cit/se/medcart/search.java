@@ -1,19 +1,17 @@
 package just.edu.cit.se.medcart;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GoogleApiAvailability;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -24,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -178,9 +177,6 @@ public class search extends AppCompatActivity {
 
 
 
-        if (isServiceOK()) { //to check if the maps service is okay then it will initialize it
-            inint();
-        }//end if
 
     } // end of onCreate function
 
@@ -261,11 +257,6 @@ public class search extends AppCompatActivity {
     }; // end of valueEventListener1
 
 
-    public void map(View view) {
-       Intent secondActivity =new Intent(getApplicationContext(),MapsActivity.class);
-        startActivity(secondActivity);
-    } // end of map function
-
 
     public void inint(){ // a function that will initiate the map
         @SuppressLint("WrongViewCast") ImageView btnMap= findViewById(R.id.btnMap);
@@ -279,32 +270,6 @@ public class search extends AppCompatActivity {
         ); // end of set on click listener
     } // end of inint function
 
-
-
-    public boolean isServiceOK(){ // function to check if the service is okay
-        try {
-            Log.d(TAG, "isServiceOK: checking google services version");
-            int available = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(search.this);
-            if (available == ConnectionResult.SUCCESS) {//if
-                Log.d(TAG, "isServiceOK: google play services is working");
-                return true;
-            } // end if
-            else if (GoogleApiAvailability.getInstance().isUserResolvableError(available)) {
-                Log.d(TAG, "isServiceOK: as error occured but we can fix it");
-                Dialog dialog = GoogleApiAvailability.getInstance().getErrorDialog(search.this, available, ERROR_DIALOG_REQUEST);
-                dialog.show();
-            }//end else if
-            else {
-                Toast.makeText(this, "you can't make app request", Toast.LENGTH_SHORT).show();
-            }//end else
-            return false;
-            }//end of try statement
-
-        catch (Exception e){
-            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
-            return false;
-        }//end of catch
-        } // end of isServiceOK function
 
 
     public void logout(View view) { //function to do logout functionality
